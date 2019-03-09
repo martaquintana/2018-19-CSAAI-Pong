@@ -1,3 +1,14 @@
 #display {
   background-color: black;
 }
+
+#arriba, #abajo {
+  background-color: lightpink;
+}
+
+#arriba2, #abajo2 {
+  background-color: lightblue;
+}
+#arriba2 {
+  margin-left: 400px;
+}
