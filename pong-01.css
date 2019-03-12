@@ -4,10 +4,30 @@
 
 #arriba, #abajo {
   background-color: lightblue;
+  font-size: 25px;
 }
 #arriba {
-  margin-left: 500px;
+  margin-left: 10%;
 }
 #abajo {
   margin-left: 10px;
+}
+
+#sacar{
+  margin-left: 250px;
+  padding: 3px;
+  padding-left: 5px;
+  padding-right: 10px;
+  font-family: helvetica;
+  font-weight: 300;
+  font-size: 25px;
+  font-style: italic;
+  color: white;
+  background-color: orange;
+  border-radius: 15px;
+  border: 3px double white;
+ }
+ .boton_1:hover{
+   opacity: 0.6;
+ }
 }
