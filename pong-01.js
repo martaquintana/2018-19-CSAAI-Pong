@@ -1,39 +1,33 @@
 function main()
 {
   console.log("Pong: Main: Start!")
-
+  var marcadormaquina=0;
+  var marcadorjugador=0;
   var canvas = document.getElementById('display')
   canvas.width = 600;
   canvas.height = 400;
   var ctx = canvas.getContext("2d");
-  //-- Raquetas
-  ctx.fillStyle = 'white';
-  ctx.fillRect(50,canvas.height/2-20, 10, 40)
-  ctx.fillStyle = 'white';
-  ctx.fillRect(500,canvas.height/2-20, 10, 40)
-  //--Linea
-  ctx = canvas.getContext("2d");
-  ctx.setLineDash([4, 14, 18]);
-  ctx.moveTo(canvas.width/2, 0);
-  ctx.lineTo(canvas.width/2,canvas.height);
-  ctx.strokeStyle = 'white';
-  ctx.stroke();
-  //--Pelota
-  ctx.beginPath();
-  ctx.arc(100, 50, 5, 0, 2 * Math.PI);
-  ctx.stroke()
-  ctx.fillStyle = 'white';
-  ctx.fill()
-  //--Marcador Jugador1
-  ctx.font="60px Comic Sans MS";
-  ctx.fillStyle = "white";
-  ctx.textAlign = "center";
-  ctx.fillText("2", canvas.width/2-50, 50);
-  //--Marcador Jugador2
-  ctx.font="60px Comic Sans MS";
-  ctx.fillStyle = "white";
-  ctx.textAlign = "center";
-  ctx.fillText("0", canvas.width/2+50, 50);
+  var marcador ={
+    ctx:null,
+    init : function(ctx){
+      this.ctx= ctx;
+    },
+    draw: function(marcadormaquina,marcadorjugador){
+      //--Marcador Maquina
+      ctx.font="60px Comic Sans MS";
+      ctx.fillStyle = "white";
+      ctx.textAlign = "center";
+      ctx.fillText(marcadormaquina, canvas.width/2-50, 50);
+      //--Marcador Jugador
+      ctx.font="60px Comic Sans MS";
+      ctx.fillStyle = "white";
+      ctx.textAlign = "center";
+      ctx.fillText(marcadorjugador, canvas.width/2+50, 50);
+    }
+  }
+
+
+
 
   var bola = {
     x_init:50,
@@ -105,7 +99,7 @@ function main()
       ctx.fill()
     },
     update: function(){
-      palamaquina.y= bola.y-palamaquina.altura/2;
+      this.y= bola.y-this.altura/2 +30; //+30 para que sea mas torpe
     },
   }
 
@@ -141,11 +135,9 @@ function main()
       window.onkeydown = (e) => {
         e.preventDefault();
         console.log(e.keyCode)
-
-        //Numero del espacio para poder sacar dando al espacio o boton sacar
+        //Flechas
       if(e.keyCode == '38'|| e.keyCode == '40'){  moverpala(e.keyCode); }
       }
-      console.log(this.y)
       function moverpala(e){
         if(e =='38' && palajugador.y >palajugador.altura/20){
         palajugador.y-=palajugador.vy
@@ -165,6 +157,8 @@ function main()
   palamaquina.draw();
   palajugador.init(ctx);
   palajugador.draw();
+  marcador.init(ctx);
+  marcador.draw(marcadormaquina,marcadorjugador);
 
   var timer = null;
   var sacar = document.getElementById('sacar');
@@ -183,6 +177,9 @@ function main()
       palamaquina.draw();
       palajugador.init(ctx);
       palajugador.draw();
+      marcador.init(ctx);
+      marcador.draw(marcadormaquina,marcadorjugador);
+
       console.log("Sacar Click")
       //Lanzar el timer si no estaba lanzado antes.
       if(!timer){
@@ -197,13 +194,41 @@ function main()
           bola.draw()
           palamaquina.draw()
           palajugador.draw()
+          marcador.draw(marcadormaquina,marcadorjugador);
+
+
+          if(bola.x >= palajugador.x-palajugador.anchura && bola.x <= palajugador.x+palajugador.anchura){
+            if(bola.y <= palajugador.y+palajugador.altura && bola.y >= palajugador.y-10){
+              bola.vx = -bola.vx;
+            }
+          }
+
+          if(bola.x+ bola.vx<= palamaquina.x){
+            console.log(bola.y)
+
+            if(bola.y <= palamaquina.y+palamaquina.altura && bola.y >= palamaquina.y+palamaquina.anchura){
+              console.log(bola.y)
+              bola.vx = -bola.vx;
+            }
+          }
+
           //--Condiciones de terminacion
-          if(bola.x>canvas.width){
-              clearInterval(timer)
-              bola.reset();
-              bola.update();
-              ctx.clearRect(0,0,canvas.width,canvas.height);
-              bola.draw();
+          if(bola.x>=canvas.width-6 || bola.x<=6){
+            console.log('hey')
+            console.log('punto!')
+            if(bola.x>=canvas.width-6){
+                marcadormaquina +=1;
+            }
+            if(bola.x<=6){
+                marcadorjugador +=1;
+            }
+            marcador.draw(marcadormaquina,marcadorjugador)
+
+              //clearInterval(timer)
+              //bola.reset();
+              //bola.update();
+              //ctx.clearRect(0,0,canvas.width,canvas.height);
+              //bola.draw();
             }
           },20);
         }
