@@ -3,12 +3,11 @@
 }
 
 #arriba, #abajo {
-  background-color: lightpink;
-}
-
-#arriba2, #abajo2 {
   background-color: lightblue;
 }
-#arriba2 {
-  margin-left: 400px;
+#arriba {
+  margin-left: 500px;
+}
+#abajo {
+  margin-left: 10px;
 }
