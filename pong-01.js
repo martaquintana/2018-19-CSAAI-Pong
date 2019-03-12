@@ -68,8 +68,6 @@ function main()
       ctx.lineTo(canvas.width/2,canvas.height);
       ctx.strokeStyle = 'white';
       ctx.stroke();
-
-
     },
     update: function(){
       if(this.x + this.vx > canvas.width- 5 || this.x + this.vx < 5) {
@@ -81,7 +79,6 @@ function main()
       this.x=this.x+this.vx;
       this.y=this.y+this.vy;
     },
-
   };
   ///
   var pala1 = {
@@ -89,7 +86,7 @@ function main()
     y_init:canvas.height/2-20,
     x:0,
     y:0,
-    vy:20,
+    vy:10,
     ctx:null,
     anchura:10,
     altura:40,
@@ -109,8 +106,7 @@ function main()
     },
     update: function(){
       var arriba = document.getElementById('arriba');
-      var abajo = document.getElementById('abajo');
-      var hey;
+      var abajo= document.getElementById('abajo');
       arriba.onclick = ()=>{  moverpala('87'); }
       abajo.onclick = ()=>{  moverpala('83'); }
       window.onkeydown = (e) => {
@@ -134,10 +130,67 @@ function main()
     },
   }
   ///
+  var pala2 = {
+    x_init:500,
+    y_init:canvas.height/2-20,
+    x:0,
+    y:0,
+    vy:10,
+    ctx:null,
+    anchura:10,
+    altura:40,
+    reset: function(){
+      this.x= this.x_init;
+      this.y= this.y_init;
+    },
+    init : function(ctx){
+      this.reset();
+      this.ctx= ctx;
+    },
+
+    draw : function(){
+      ctx.fillStyle = 'white';
+      ctx.fillRect(this.x,this.y, this.anchura, this.altura)
+      ctx.fill()
+    },
+    update: function(){
+      var arriba2 = document.getElementById('arriba2');
+      var abajo2 = document.getElementById('abajo2');
+      arriba2.onclick = ()=>{  moverpala('80'); }
+      abajo2.onclick = ()=>{  moverpala('76'); }
+      window.onkeydown = (e) => {
+        e.preventDefault();
+        console.log(e.keyCode)
+
+        //Numero del espacio para poder sacar dando al espacio o boton sacar
+      if(e.keyCode == '80'|| e.keyCode == '76'){  moverpala(e.keyCode); }
+      }
+      console.log(this.y)
+      function moverpala(e){
+        if(e =='80' && pala2.y >pala2.altura/20){
+        pala2.y-=pala2.vy
+        }
+        if(e == '76'){
+          if(pala2.y != canvas.height-40){
+            pala2.y+=pala2.vy
+          }
+        }
+        //this.vy = this.vy*(-1);
+      }
+      //this.y=this.y+this.vy;
+
+    },
+  }
+  ///
+  ///
+
+
   bola.init(ctx);
   bola.draw();
   pala1.init(ctx);
   pala1.draw();
+  pala2.init(ctx);
+  pala2.draw();
 
   var timer = null;
   var sacar = document.getElementById('sacar');
@@ -146,16 +199,16 @@ function main()
   window.onkeydown = (e) => {
     e.preventDefault();
     console.log(e.keyCode)
-
     //Numero del espacio para poder sacar dando al espacio o boton sacar
   if(e.keyCode == '32'){  moverbola(); }
-
 }
   function moverbola(){
       bola.init(ctx);
       bola.draw();
       pala1.init(ctx);
       pala1.draw();
+      pala2.init(ctx);
+      pala2.draw();
       console.log("Sacar Click")
       //Lanzar el timer si no estaba lanzado antes.
       if(!timer){
@@ -163,11 +216,13 @@ function main()
           //--Actualizar la bola
           bola.update()
           pala1.update()
+          pala2.update()
           //--Borrar canvas
           ctx.clearRect(0,0,canvas.width,canvas.height);
           //--Dibujar la bola
           bola.draw()
           pala1.draw()
+          pala2.draw()
           //--Condiciones de terminacion
           if(bola.x>canvas.width){
               clearInterval(timer)
