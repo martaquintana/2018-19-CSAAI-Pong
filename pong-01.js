@@ -26,9 +26,6 @@ function main()
     }
   }
 
-
-
-
   var bola = {
     x_init:50,
     y_init:50,
@@ -163,7 +160,9 @@ function main()
   var timer = null;
   var sacar = document.getElementById('sacar');
   var e;
-  sacar.onclick = ()=>{  moverbola(); }
+  sacar.onclick = ()=>{  moverbola();
+    marcadormaquina=0;
+    marcadorjugador=0;}
   window.onkeydown = (e) => {
     e.preventDefault();
     console.log(e.keyCode)
