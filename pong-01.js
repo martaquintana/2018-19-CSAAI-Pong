@@ -3,6 +3,7 @@ function main()
   console.log("Pong: Main: Start!")
   var marcadormaquina=0;
   var marcadorjugador=0;
+  var random = Math.random();
   var canvas = document.getElementById('display')
   canvas.width = 600;
   canvas.height = 400;
@@ -96,7 +97,8 @@ function main()
       ctx.fill()
     },
     update: function(){
-      this.y= bola.y-this.altura/2 +30; //+30 para que sea mas torpe
+      this.y= bola.y-this.altura/4*0.1; //
+      console.log(random)
     },
   }
 
@@ -205,7 +207,7 @@ function main()
           if(bola.x+ bola.vx<= palamaquina.x){
             console.log(bola.y)
 
-            if(bola.y <= palamaquina.y+palamaquina.altura && bola.y >= palamaquina.y+palamaquina.anchura){
+            if(bola.y <= palamaquina.y+palamaquina.altura && bola.y >= palamaquina.y-palamaquina.altura){
               console.log(bola.y)
               bola.vx = -bola.vx;
             }
