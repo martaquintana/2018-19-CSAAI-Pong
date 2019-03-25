@@ -1,24 +1,28 @@
 #display {
   background-color: black;
   margin: inherit;
+  
 }
 #pong{
 margin-left: 250px;
 margin-bottom: 0px;
+margin-top: 0px;
 text-align: left;
 font-family: Arial Black;
 font-weight: bold; font-size: 40px;
-background: #202020;
+color: transparent;
 -webkit-background-clip: text;
 -moz-background-clip: text;
 background-clip: text;
-color:transparent;
-text-shadow: 0px 3px 3px rgba(255,255,255,0.4),0px -1px 1px rgba(0,0,0,0.3);
+
+text-shadow: 0px 0px 0px rgba(0,0,0,1), 0px 2px 0px rgba(255,255,255,0.7);
 
 }
 body{
-/*background-image: url("Mundodigital.gif");*/
-color: transparent;
+padding-left: 65px;
+background-image: url("fondo.png");
+background-repeat: no-repeat;
+
 }
 
 #arriba, #abajo {
@@ -31,7 +35,9 @@ color: transparent;
 #abajo  {
   margin-left: 10px;
 }
-
+#arriba:hover, #abajo:hover {
+    color: white;
+    box-shadow: 0 5px 5px 0 rgba(0,0,0,0.24),0 5px 20px 0 rgba(0,0,0,0.19);}
 #sacar{
   margin-left: 250px;
   padding: 3px;
