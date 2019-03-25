@@ -1,7 +1,7 @@
 #display {
   background-color: black;
   margin: inherit;
-  
+
 }
 #pong{
 margin-left: 250px;
@@ -28,21 +28,37 @@ background-repeat: no-repeat;
 #arriba, #abajo {
   background-color: lightblue;
   font-size: 25px;
+  text-decoration:none;
+  padding-top:15px;
+  padding-bottom:15px;
+  padding-left:35px;
+  padding-right:35px;
+  border-width: 3px;
+  border-style: solid;
+  border-radius:40px;
+
 }
 #arriba  {
-  margin-left: 10%;
+  margin-left:5%;
+  background-color:#F4FF81;
+  border-color:#C0CA33;
+  color:#1E88E5;
+
 }
 #abajo  {
   margin-left: 10px;
+  background-color:#1E88E5;
+  border-color: #01579B;
+  color:#F4FF81;
 }
 #arriba:hover, #abajo:hover {
     color: white;
     box-shadow: 0 5px 5px 0 rgba(0,0,0,0.24),0 5px 20px 0 rgba(0,0,0,0.19);}
 #sacar{
-  margin-left: 250px;
-  padding: 3px;
-  padding-left: 5px;
-  padding-right: 10px;
+  margin-left: 190px; /*250px para estar en el centro*/
+  padding: 10px;
+  padding-left: 15px;
+  padding-right: 20px;
   font-family: helvetica;
   font-weight: 300;
   font-size: 25px;
