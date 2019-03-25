@@ -28,8 +28,8 @@ function main()
   }
 
   var bola = {
-    x_init:50,
-    y_init:50,
+    x_init:canvas.width/2,
+    y_init:canvas.height/2,
     x:0,
     y:0,
     vx:4,
